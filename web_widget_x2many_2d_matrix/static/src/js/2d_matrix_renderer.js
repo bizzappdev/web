@@ -481,6 +481,10 @@ odoo.define('web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer', function (requ
         _apply_aggregate_value: function ($cell, aggregate) {
             var field = this.state.fields[aggregate.fname],
                 formatter = field_utils.format[field.type];
+            var field_info = this.state.fieldsInfo.list[aggregate.fname];
+            if (field_info.widget) {
+                formatter = field_utils.format[field_info.widget];
+            }
             var formattedValue = formatter(
                 aggregate.value, field, {escape: true}
             );
